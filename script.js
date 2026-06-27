@@ -24,6 +24,30 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => navLinks.classList.remove('open'));
 });
 
+// ── ACTIVE NAV HIGHLIGHT ──
+const sections = document.querySelectorAll('section[id]');
+const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+
+function setActiveNav() {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navAnchors.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === `#${current}`) {
+      a.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', setActiveNav);
+setActiveNav();
+
 // Scroll animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {

@@ -51,6 +51,12 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
   transition: color var(--transition);
 }
 .nav-links a:hover { color: var(--black); }
+.nav-links a.active {
+  color: var(--black);
+  font-weight: 700;
+  border-bottom: 2px solid var(--black);
+  padding-bottom: 2px;
+}
 
 .nav-cta {
   background: var(--black);
@@ -673,6 +679,7 @@ body.dark nav {
 }
 body.dark .nav-links a { color: #888; }
 body.dark .nav-links a:hover { color: #fff; }
+body.dark .nav-links a.active { color: #fff; border-bottom-color: #fff; }
 body.dark .nav-cta { background: #fff; color: #000 !important; }
 body.dark .nav-cta:hover { background: #e8e8e8; }
 body.dark .hamburger span { background: #fff; }
