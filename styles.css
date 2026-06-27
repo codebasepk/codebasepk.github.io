@@ -735,6 +735,11 @@ body.dark .team-card { background: #111; border-color: #2a2a2a; }
 body.dark .team-card:hover { border-color: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
 body.dark .team-card p { color: #888; }
 
+body.dark #contact iframe {
+  filter: invert(1) hue-rotate(180deg);
+  border-radius: 8px;
+}
+
 body.dark footer { background: #050505; }
 body.dark .footer-logo img { filter: invert(0); opacity: 0.5; }
 
