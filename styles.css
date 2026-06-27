@@ -363,6 +363,73 @@ section { padding: 6rem 5%; }
 .p-stat-num { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; }
 .p-stat-label { font-size: 0.7rem; color: var(--gray-400); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
 
+/* ── REVIEWS ── */
+#reviews { background: var(--white); }
+.reviews-header { margin-bottom: 2.5rem; }
+
+.reviews-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: var(--black);
+  border-radius: 12px;
+  padding: 2rem 3rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+.rs-item { text-align: center; padding: 0 2.5rem; }
+.rs-num { font-size: 1.6rem; font-weight: 800; color: var(--white); letter-spacing: -0.03em; }
+.rs-label { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-top: 0.2rem; }
+.rs-divider { width: 1px; height: 40px; background: #222; flex-shrink: 0; }
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.review-card {
+  padding: 1.75rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 10px;
+  transition: var(--transition);
+}
+.review-card:hover { border-color: var(--black); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.07); }
+
+.review-top { display: flex; align-items: flex-start; gap: 0.875rem; margin-bottom: 1rem; }
+
+.review-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.review-meta { flex: 1; }
+.review-name { font-size: 0.9rem; font-weight: 700; }
+.review-flag { font-size: 0.85rem; }
+.review-stars { font-size: 0.8rem; color: #f59e0b; margin-top: 0.1rem; }
+.review-stars span { color: var(--gray-600); font-size: 0.75rem; }
+
+.review-time { font-size: 0.72rem; color: var(--gray-400); white-space: nowrap; flex-shrink: 0; }
+
+.review-project {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+
+.review-text { font-size: 0.875rem; color: var(--gray-600); line-height: 1.65; font-style: italic; }
+
 /* ── TEAM ── */
 #team { background: var(--white); }
 
