@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 168" fill="none">
+  <!-- C -->
+  <text x="0" y="112" font-family="'Arial Black', 'Arial Bold', Arial, sans-serif" font-weight="900" font-size="108" fill="#0a0a0a">C</text>
+
+  <!-- O -->
+  <text x="76" y="112" font-family="'Arial Black', 'Arial Bold', Arial, sans-serif" font-weight="900" font-size="108" fill="#0a0a0a">O</text>
+  <!-- dot inside O -->
+  <circle cx="122" cy="65" r="8" fill="white"/>
+
+  <!-- D -->
+  <text x="157" y="112" font-family="'Arial Black', 'Arial Bold', Arial, sans-serif" font-weight="900" font-size="108" fill="#0a0a0a">D</text>
+
+  <!-- E -->
+  <text x="237" y="112" font-family="'Arial Black', 'Arial Bold', Arial, sans-serif" font-weight="900" font-size="108" fill="#0a0a0a">E</text>
+
+  <!-- base -->
+  <text x="250" y="152" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-weight="400" font-size="26" fill="#0a0a0a">base</text>
+</svg>
