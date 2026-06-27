@@ -476,6 +476,8 @@ section { padding: 6rem 5%; }
   flex-wrap: wrap;
 }
 .rs-item { text-align: center; padding: 0 2.5rem; }
+.rs-link { text-decoration: none; transition: opacity 0.2s ease; }
+.rs-link:hover { opacity: 0.75; }
 .rs-num { font-size: 1.6rem; font-weight: 800; color: var(--white); letter-spacing: -0.03em; }
 .rs-label { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-top: 0.2rem; }
 .rs-divider { width: 1px; height: 40px; background: #222; flex-shrink: 0; }
