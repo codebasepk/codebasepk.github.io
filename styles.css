@@ -710,12 +710,12 @@ body.dark .section-subtitle { color: #888; }
 
 body.dark #services { background: #0a0a0a; }
 body.dark .service-card { background: #111; border-color: #2a2a2a; }
-body.dark .service-card:hover { box-shadow: 0 24px 48px rgba(0,0,0,0.4); }
+body.dark .service-card:hover { transform: translateY(-12px); box-shadow: 0 24px 48px rgba(255,255,255,0.08); }
 body.dark .service-card p { color: #888; }
 
 body.dark #portfolio { background: #111; }
 body.dark .portfolio-card { background: #1a1a1a; border-color: #2a2a2a; }
-body.dark .portfolio-card:hover { box-shadow: 0 24px 48px rgba(0,0,0,0.4); }
+body.dark .portfolio-card:hover { transform: translateY(-12px); box-shadow: 0 24px 48px rgba(255,255,255,0.08); }
 body.dark .portfolio-category { color: #666; }
 body.dark .portfolio-body p { color: #888; }
 body.dark .p-stat-label { color: #666; }
@@ -725,14 +725,14 @@ body.dark .reviews-stats { background: #111; border: 1.5px solid #2a2a2a; }
 body.dark .rs-divider { background: #2a2a2a; }
 body.dark .rs-label { color: #555; }
 body.dark .review-card { background: #111; border-color: #2a2a2a; }
-body.dark .review-card:hover { box-shadow: 0 24px 48px rgba(0,0,0,0.4); }
+body.dark .review-card:hover { transform: translateY(-12px); box-shadow: 0 24px 48px rgba(255,255,255,0.08); }
 body.dark .review-time { color: #555; }
 body.dark .review-project { color: #666; }
 body.dark .review-text { color: #888; }
 
 body.dark #team { background: #0a0a0a; }
 body.dark .team-card { background: #111; border-color: #2a2a2a; }
-body.dark .team-card:hover { box-shadow: 0 24px 48px rgba(0,0,0,0.4); }
+body.dark .team-card:hover { transform: translateY(-12px); box-shadow: 0 24px 48px rgba(255,255,255,0.08); }
 body.dark .team-card p { color: #888; }
 
 body.dark #contact iframe {
