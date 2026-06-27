@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codebase — Company Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --gray-100: #f7f7f7;
+      --gray-200: #e8e8e8;
+      --gray-400: #999999;
+      --gray-600: #555555;
+      --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: #ddd;
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    /* Print button */
+    .print-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 999;
+      font-size: 0.85rem;
+    }
+    .print-bar span { opacity: 0.6; }
+    .print-btn {
+      background: var(--white);
+      color: var(--black);
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+    }
+    .print-btn:hover { background: #e8e8e8; }
+
+    /* Page */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--white);
+      margin: 5rem auto 2rem;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── COVER PAGE ── */
+    .cover {
+      background: var(--black);
+      min-height: 297mm;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover-bg-text {
+      position: absolute;
+      bottom: -2rem;
+      right: -1rem;
+      font-size: 14rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.03);
+      letter-spacing: -0.05em;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .cover-header {
+      padding: 3rem 3rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cover-logo img { height: 44px; filter: invert(1); }
+
+    .cover-year {
+      font-size: 0.75rem;
+      color: #555;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .cover-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem;
+    }
+
+    .cover-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .cover-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 2rem;
+    }
+
+    .cover-title em {
+      font-style: normal;
+      color: #444;
+    }
+
+    .cover-tagline {
+      font-size: 1.1rem;
+      color: #888;
+      max-width: 360px;
+      line-height: 1.65;
+      margin-bottom: 3rem;
+    }
+
+    .cover-divider {
+      width: 60px;
+      height: 2px;
+      background: #333;
+      margin-bottom: 3rem;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .cover-meta-item {}
+    .cover-meta-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #555;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .cover-meta-value {
+      font-size: 0.9rem;
+      color: #999;
+      font-weight: 500;
+    }
+
+    .cover-footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cover-footer span { font-size: 0.75rem; color: #444; }
+
+    /* ── INNER PAGES ── */
+    .inner-page {
+      min-height: 297mm;
+      display: flex;
+      flex-direction: column;
+      margin-top: 2rem;
+    }
+
+    .page-header {
+      padding: 2.5rem 3rem 2rem;
+      border-bottom: 1.5px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .page-header-logo img { height: 28px; }
+    .page-header-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+
+    .page-body { padding: 2.5rem 3rem; flex: 1; }
+
+    .page-footer {
+      padding: 1.25rem 3rem;
+      border-top: 1.5px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .page-footer span { font-size: 0.7rem; color: var(--gray-400); }
+
+    /* Section headings */
+    .sec-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 0.6rem;
+    }
+    .sec-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+    .sec-sub {
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .pillar {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.875rem;
+      padding: 1rem;
+      background: var(--gray-100);
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+    }
+    .pillar-icon {
+      font-size: 1.1rem;
+      width: 36px; height: 36px;
+      background: var(--black);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .pillar h4 { font-size: 0.8rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .pillar p { font-size: 0.75rem; color: var(--gray-600); line-height: 1.5; }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .svc {
+      padding: 1.25rem;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+    }
+    .svc-icon { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .svc h3 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .svc p { font-size: 0.75rem; color: var(--gray-600); line-height: 1.55; }
+
+    /* Portfolio */
+    .proj-card {
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .proj-cover {
+      background: var(--black);
+      height: 100px;
+      display: flex;
+      align-items: center;
+      padding: 1.5rem;
+      position: relative;
+    }
+    .proj-cover-title {
+      font-size: 2rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.1);
+      letter-spacing: -0.04em;
+    }
+    .proj-cover-badge {
+      position: absolute;
+      bottom: 0.75rem; left: 1.5rem;
+      background: var(--white);
+      color: var(--black);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+    }
+    .proj-body { padding: 1.5rem; }
+    .proj-cat {
+      font-size: 0.65rem;
+      color: var(--gray-400);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .proj-body h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .proj-body p { font-size: 0.8rem; color: var(--gray-600); line-height: 1.6; margin-bottom: 1rem; }
+    .proj-stats { display: flex; gap: 2rem; }
+    .pst-num { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; display: block; }
+    .pst-label { font-size: 0.65rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .tm-card {
+      padding: 1.5rem;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .tm-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--black);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      letter-spacing: -0.02em;
+    }
+    .tm-body h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .tm-role { font-size: 0.68rem; color: var(--gray-400); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+    .tm-body p { font-size: 0.78rem; color: var(--gray-600); line-height: 1.55; }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .ct-item {
+      display: flex;
+      gap: 0.875rem;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+    }
+    .ct-icon {
+      width: 40px; height: 40px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .ct-label { font-size: 0.65rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.1rem; }
+    .ct-value { font-size: 0.875rem; font-weight: 500; color: var(--black); }
+
+    .contact-cta {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 10px;
+      padding: 2rem;
+    }
+    .contact-cta h3 { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .contact-cta p { font-size: 0.8rem; color: #aaa; line-height: 1.6; margin-bottom: 1.25rem; }
+    .contact-cta-email {
+      display: inline-block;
+      background: var(--white);
+      color: var(--black);
+      padding: 0.6rem 1.25rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+
+    @media print {
+      body { background: none; }
+      .print-bar { display: none; }
+      .page { margin: 0; box-shadow: none; width: 100%; }
+      .inner-page { page-break-before: always; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Print bar -->
+<div class="print-bar">
+  <span>Codebase — Company Portfolio 2024</span>
+  <button class="print-btn" onclick="window.print()">Export as PDF</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 1 — COVER
+════════════════════════════════════════ -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-bg-text">CB</div>
+
+    <div class="cover-header">
+      <div class="cover-logo"><img src="assets/logo.png" alt="Codebase" /></div>
+      <div class="cover-year">Portfolio 2024</div>
+    </div>
+
+    <div class="cover-body">
+      <div class="cover-tag">Software Development Company</div>
+      <h1 class="cover-title">
+        Transforming<br />ideas into<br /><em>scalable</em><br />solutions.
+      </h1>
+      <p class="cover-tagline">
+        We build innovative mobile apps, web platforms, and custom software that empowers businesses to grow and succeed.
+      </p>
+      <div class="cover-divider"></div>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Email</div>
+          <div class="cover-meta-value">codebasepk@gmail.com</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">Phone</div>
+          <div class="cover-meta-value">+92 341 4503584</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="cover-meta-label">GitHub</div>
+          <div class="cover-meta-value">github.com/codebasepk</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <span>Confidential — © 2024 Codebase. All Rights Reserved.</span>
+      <span>Page 1</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 2 — ABOUT
+════════════════════════════════════════ -->
+<div class="page">
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-header-logo"><img src="assets/logo.png" alt="Codebase" /></div>
+      <div class="page-header-label">About Us</div>
+    </div>
+    <div class="page-body">
+      <div class="sec-tag">Who We Are</div>
+      <h2 class="sec-title">Built on innovation,<br />driven by results</h2>
+      <div class="about-grid">
+        <div>
+          <p class="sec-sub">
+            Codebase is a software development company focused on building innovative, scalable, and high-quality digital solutions. We specialize in mobile apps, web platforms, and custom software tailored to our clients' unique business needs.
+          </p>
+          <p class="sec-sub" style="margin-top:-1rem;">
+            Our mission is to empower businesses through technology, delivering reliable solutions that drive growth, efficiency, and long-term success.
+          </p>
+          <div style="margin-top:1.5rem;">
+            <div style="display:flex;gap:2.5rem;">
+              <div>
+                <div style="font-size:1.75rem;font-weight:900;letter-spacing:-0.04em;">8+</div>
+                <div style="font-size:0.7rem;color:#999;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Services</div>
+              </div>
+              <div>
+                <div style="font-size:1.75rem;font-weight:900;letter-spacing:-0.04em;">1K+</div>
+                <div style="font-size:0.7rem;color:#999;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Downloads</div>
+              </div>
+              <div>
+                <div style="font-size:1.75rem;font-weight:900;letter-spacing:-0.04em;">4</div>
+                <div style="font-size:0.7rem;color:#999;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Engineers</div>
+              </div>
+              <div>
+                <div style="font-size:1.75rem;font-weight:900;letter-spacing:-0.04em;">🌍</div>
+                <div style="font-size:0.7rem;color:#999;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Global</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="pillar">
+            <div class="pillar-icon">💡</div>
+            <div>
+              <h4>Innovation First</h4>
+              <p>We embrace cutting-edge technologies to build future-ready products that stand out in the market.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">🎯</div>
+            <div>
+              <h4>Client-Centered</h4>
+              <p>Every solution is tailored to your specific business goals, ensuring real-world impact and measurable results.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">🔒</div>
+            <div>
+              <h4>Quality & Reliability</h4>
+              <p>We maintain the highest standards of code quality, security, and performance across every project we deliver.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>© 2024 Codebase</span>
+      <span>Page 2</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 3 — SERVICES
+════════════════════════════════════════ -->
+<div class="page">
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-header-logo"><img src="assets/logo.png" alt="Codebase" /></div>
+      <div class="page-header-label">Services</div>
+    </div>
+    <div class="page-body">
+      <div class="sec-tag">What We Do</div>
+      <h2 class="sec-title">Services we offer</h2>
+      <p class="sec-sub">From idea to deployment — we cover the full spectrum of software development.</p>
+      <div class="services-grid">
+        <div class="svc">
+          <div class="svc-icon">📱</div>
+          <h3>Mobile App Development</h3>
+          <p>High-performance iOS and Android applications using native and cross-platform technologies.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">🌐</div>
+          <h3>Web Development</h3>
+          <p>Custom websites, web applications, and enterprise platforms — secure, scalable, and performant.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">⚙️</div>
+          <h3>Backend Development & APIs</h3>
+          <p>Robust backend systems, REST APIs, and cloud-based infrastructures powering modern digital products.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">🎨</div>
+          <h3>UI/UX Design</h3>
+          <p>Intuitive and visually appealing user interfaces for exceptional experiences across web and mobile.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">💬</div>
+          <h3>Real-Time Communication</h3>
+          <p>Real-time messaging, chat, voice, and video communication systems for fast and reliable connectivity.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">☁️</div>
+          <h3>Cloud & DevOps</h3>
+          <p>Deploy, manage, and scale applications using cloud platforms, automation, and DevOps practices.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">🛒</div>
+          <h3>E-Commerce Development</h3>
+          <p>Secure and scalable e-commerce platforms to sell products and services online efficiently.</p>
+        </div>
+        <div class="svc">
+          <div class="svc-icon">🛠️</div>
+          <h3>Maintenance & Support</h3>
+          <p>Ongoing maintenance, performance optimization, and technical support to keep apps running reliably.</p>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>© 2024 Codebase</span>
+      <span>Page 3</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 4 — PORTFOLIO
+════════════════════════════════════════ -->
+<div class="page">
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-header-logo"><img src="assets/logo.png" alt="Codebase" /></div>
+      <div class="page-header-label">Portfolio</div>
+    </div>
+    <div class="page-body">
+      <div class="sec-tag">Our Work</div>
+      <h2 class="sec-title">Projects we're proud of</h2>
+      <p class="sec-sub">A selection of solutions we've delivered for our clients.</p>
+
+      <div class="proj-card">
+        <div class="proj-cover">
+          <div class="proj-cover-title">LIOX</div>
+          <div class="proj-cover-badge">Mobile App</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-cat">Laundry & Cleaning</div>
+          <h3>Liox — Laundry and Cleaning App</h3>
+          <p>Built native iOS and Android mobile applications for an on-demand laundry, dry cleaning, and home cleaning platform. The app was launched globally and operates in the USA, enabling customers to schedule pickups, track orders, and make payments seamlessly.</p>
+          <div class="proj-stats">
+            <div>
+              <span class="pst-num">1K+</span>
+              <span class="pst-label">Downloads</span>
+            </div>
+            <div>
+              <span class="pst-num">🌍</span>
+              <span class="pst-label">Global Launch</span>
+            </div>
+            <div>
+              <span class="pst-num">USA</span>
+              <span class="pst-label">Operations</span>
+            </div>
+            <div>
+              <span class="pst-num">iOS + Android</span>
+              <span class="pst-label">Platforms</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="border:1.5px dashed var(--gray-200);border-radius:10px;padding:2rem;text-align:center;color:var(--gray-400);">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;opacity:0.4;">+</div>
+        <div style="font-size:0.85rem;font-weight:600;">More projects coming soon</div>
+        <div style="font-size:0.78rem;margin-top:0.25rem;color:#bbb;">We are continuously delivering new solutions for our clients.</div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>© 2024 Codebase</span>
+      <span>Page 4</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 5 — TEAM
+════════════════════════════════════════ -->
+<div class="page">
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-header-logo"><img src="assets/logo.png" alt="Codebase" /></div>
+      <div class="page-header-label">Our Team</div>
+    </div>
+    <div class="page-body">
+      <div class="sec-tag">The People</div>
+      <h2 class="sec-title">The team behind Codebase</h2>
+      <p class="sec-sub">A passionate team of engineers and designers committed to building exceptional software.</p>
+      <div class="team-grid">
+        <div class="tm-card">
+          <div class="tm-avatar">IH</div>
+          <div class="tm-body">
+            <h3>Imran Hakeem</h3>
+            <div class="tm-role">CEO & Founder</div>
+            <p>10+ years building software products across mobile and web.</p>
+          </div>
+        </div>
+        <div class="tm-card">
+          <div class="tm-avatar">OA</div>
+          <div class="tm-body">
+            <h3>Omer Akram</h3>
+            <div class="tm-role">Co-Founder & CTO</div>
+            <p>Leads technical architecture and engineering at Codebase.</p>
+          </div>
+        </div>
+        <div class="tm-card">
+          <div class="tm-avatar">S</div>
+          <div class="tm-body">
+            <h3>Shahid</h3>
+            <div class="tm-role">Software Engineer & Mobile Developer</div>
+            <p>Builds native and cross-platform mobile apps and delivers seamless user experiences at Codebase.</p>
+          </div>
+        </div>
+        <div class="tm-card">
+          <div class="tm-avatar">HK</div>
+          <div class="tm-body">
+            <h3>Husnain Kareem</h3>
+            <div class="tm-role">Software Engineer & Android Developer</div>
+            <p>Develops robust and high-performance Android applications, turning complex ideas into smooth user experiences.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <span>© 2024 Codebase</span>
+      <span>Page 5</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 6 — CONTACT
+════════════════════════════════════════ -->
+<div class="page">
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-header-logo"><img src="assets/logo.png" alt="Codebase" /></div>
+      <div class="page-header-label">Contact</div>
+    </div>
+    <div class="page-body">
+      <div class="sec-tag">Get In Touch</div>
+      <h2 class="sec-title">Let's build something<br />great together</h2>
+      <p class="sec-sub">Have a project in mind? Reach out and let's discuss how Codebase can bring your idea to life.</p>
+
+      <div class="contact-grid">
+        <div>
+          <div class="ct-item">
+            <div class="ct-icon">✉️</div>
+            <div>
+              <div class="ct-label">Email</div>
+              <div class="ct-value">codebasepk@gmail.com</div>
+            </div>
+          </div>
+          <div class="ct-item">
+            <div class="ct-icon">📞</div>
+            <div>
+              <div class="ct-label">Phone</div>
+              <div class="ct-value">+92 341 4503584</div>
+            </div>
+          </div>
+          <div class="ct-item">
+            <div class="ct-icon">💻</div>
+            <div>
+              <div class="ct-label">GitHub</div>
+              <div class="ct-value">github.com/codebasepk</div>
+            </div>
+          </div>
+          <div class="ct-item">
+            <div class="ct-icon">🌐</div>
+            <div>
+              <div class="ct-label">Website</div>
+              <div class="ct-value">codebasepk.github.io</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="contact-cta">
+            <h3>Ready to start your project?</h3>
+            <p>We're always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+            <span class="contact-cta-email">codebasepk@gmail.com</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer" style="background:var(--black);">
+      <span style="color:#555;">© 2024 Codebase. All Rights Reserved.</span>
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <img src="assets/logo.png" style="height:20px;filter:invert(1);opacity:0.4;" alt="Codebase" />
+        <span style="color:#444;">Page 6</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
