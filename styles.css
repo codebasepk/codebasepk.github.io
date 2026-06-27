@@ -743,6 +743,31 @@ body.dark #contact iframe {
 body.dark footer { background: #050505; }
 body.dark .footer-logo img { filter: invert(0); opacity: 0.5; }
 
+/* ── SCROLL TO TOP ── */
+#scrollTop {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px; height: 44px;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  z-index: 99;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+#scrollTop.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
+#scrollTop:hover { background: var(--gray-800); transform: translateY(-3px); }
+
+body.dark #scrollTop { background: #fff; color: #000; }
+body.dark #scrollTop:hover { background: #e8e8e8; }
+
 /* ── SCROLL ANIMATIONS ── */
 .fade-up {
   opacity: 0;
