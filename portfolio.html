@@ -22,7 +22,7 @@
 
     body {
       font-family: var(--font);
-      background: #ddd;
+      background: #ffffff;
       color: var(--black);
       line-height: 1.6;
     }
@@ -67,12 +67,13 @@
 
     /* ── COVER PAGE ── */
     .cover {
-      background: var(--black);
+      background: var(--white);
       min-height: 297mm;
       display: flex;
       flex-direction: column;
       position: relative;
       overflow: hidden;
+      border: 1.5px solid var(--gray-200);
     }
 
     .cover-bg-text {
@@ -81,7 +82,7 @@
       right: -1rem;
       font-size: 14rem;
       font-weight: 900;
-      color: rgba(255,255,255,0.03);
+      color: rgba(0,0,0,0.04);
       letter-spacing: -0.05em;
       user-select: none;
       line-height: 1;
@@ -94,11 +95,11 @@
       justify-content: space-between;
     }
 
-    .cover-logo img { height: 44px; filter: invert(1); }
+    .cover-logo img { height: 44px; }
 
     .cover-year {
       font-size: 0.75rem;
-      color: #555;
+      color: var(--gray-400);
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -117,14 +118,14 @@
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #555;
+      color: var(--gray-400);
       margin-bottom: 1.5rem;
     }
 
     .cover-title {
       font-size: 3.5rem;
       font-weight: 900;
-      color: var(--white);
+      color: var(--black);
       letter-spacing: -0.04em;
       line-height: 1.05;
       margin-bottom: 2rem;
@@ -132,12 +133,12 @@
 
     .cover-title em {
       font-style: normal;
-      color: #444;
+      color: var(--gray-400);
     }
 
     .cover-tagline {
       font-size: 1.1rem;
-      color: #888;
+      color: var(--gray-600);
       max-width: 360px;
       line-height: 1.65;
       margin-bottom: 3rem;
@@ -146,7 +147,7 @@
     .cover-divider {
       width: 60px;
       height: 2px;
-      background: #333;
+      background: var(--gray-200);
       margin-bottom: 3rem;
     }
 
@@ -160,24 +161,24 @@
       font-size: 0.65rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #555;
+      color: var(--gray-400);
       font-weight: 600;
       margin-bottom: 0.25rem;
     }
     .cover-meta-value {
       font-size: 0.9rem;
-      color: #999;
+      color: var(--gray-600);
       font-weight: 500;
     }
 
     .cover-footer {
       padding: 2rem 3rem;
-      border-top: 1px solid #1a1a1a;
+      border-top: 1px solid var(--gray-200);
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .cover-footer span { font-size: 0.75rem; color: #444; }
+    .cover-footer span { font-size: 0.75rem; color: var(--gray-400); }
 
     /* ── INNER PAGES ── */
     .inner-page {
