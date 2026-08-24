@@ -70,7 +70,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
 // ── PARTICLE BACKGROUND ──
 const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
+const ctx = canvas ? canvas.getContext('2d') : null;
 
 let particles = [];
 const PARTICLE_COUNT = 80;
@@ -139,11 +139,13 @@ function drawParticles() {
   requestAnimationFrame(drawParticles);
 }
 
-window.addEventListener('resize', () => {
+if (canvas) {
+  window.addEventListener('resize', () => {
+    resize();
+    createParticles();
+  });
+
   resize();
   createParticles();
-});
-
-resize();
-createParticles();
-drawParticles();
+  drawParticles();
+}
